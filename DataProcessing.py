@@ -40,13 +40,17 @@ def create_player_table(match_num, player_num):
 
 
 if __name__ == "__main__":
-    df2 = pd.read_csv('eSports_Sensors_Dataset-master/matches/match_0/player_1/emg.csv')
-    df1 = create_player_table(0, 0)
-    print(df1)
-    print(df1.columns.tolist())
-    #print(df2.head())
-    #print(pd.concat([df1, df2], ignore_index=True).sort_index())
-    # print(pd.merge(df1, df2, on=['time', 'emg_right_hand', 'emg_left_hand'], how='outer'))
+    dfc = create_player_table(0, 0)
+    print(dfc.columns.tolist())
+
+    for i in range(0, 22):
+        for j in range(0, 5):
+            if i != 0 and j != 0:
+                df = create_player_table(i, j)
+                dfc = pd.concat([dfc, df], ignore_index=True).sort_index()
+
+    print(dfc)
+    print(dfc.columns.tolist())
 
     # for subdir, dirs, files in os.walk(rootdir):
     #     for file in files:
