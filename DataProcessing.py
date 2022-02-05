@@ -91,6 +91,12 @@ def create_player_table(match_num, player_num):
                 else:
                     fin_df = pd.merge(fin_df, df0, on='time', how='outer')
 
+    # Check the team and create a column
+    json_file = open('eSports_Sensors_Dataset-master/matches/match_' + str(match_num) + '/meta_info.json')
+    team = json.load(json_file)
+
+    fin_df = fin_df.assign(team=team['team'])
+
     return fin_df
 
 
@@ -104,8 +110,7 @@ if __name__ == "__main__":
                 df = create_player_table(i, j)
                 dfc = pd.concat([dfc, df], ignore_index=True).sort_index()
 
-    print(dfc)
-    print(dfc.columns.tolist())
+    dfc.to_csv('DataFrame.csv')
 
     # for subdir, dirs, files in os.walk(rootdir):
     #     for file in files:
