@@ -4,7 +4,7 @@ import os, json
 
 
 def create_player_table(match_num, player_num):
-    rdir = 'eSports_Sensors_Dataset-master/matches/match_' + str(match_num) + '/player_' + str(player_num)
+    rdir = 'eSports_Sensors_Dataset-master\matches\match_' + str(match_num) + '\player_' + str(player_num)
     df0 = pd.DataFrame
     fin_df = pd.DataFrame
     ind = 0
@@ -92,7 +92,7 @@ def create_player_table(match_num, player_num):
                     fin_df = pd.merge(fin_df, df0, on='time', how='outer')
 
     # Check the team and create a column
-    json_file = open('eSports_Sensors_Dataset-master/matches/match_' + str(match_num) + '/meta_info.json')
+    json_file = open('eSports_Sensors_Dataset-master\matches\match_' + str(match_num) + '\meta_info.json')
     team = json.load(json_file)
 
     fin_df = fin_df.assign(team=team['team'])
